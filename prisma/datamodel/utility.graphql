@@ -1,0 +1,97 @@
+"""
+Gender
+"""
+enum Gender {
+  MALE
+  FEMALE
+  OTHER
+}
+
+"""
+Universal ID Type
+"""
+enum UniversalIdType {
+  GTIN
+  UPC
+  EAN
+}
+
+"""
+Physical address of a customer
+"""
+type AddressCustomer {
+  """
+  ID
+  """
+  id: ID! @id
+  """
+  Customer who has added this address
+  """
+  customerAddress: Customer
+    @relation(name: "CustomerAddressesRelation", onDelete: SET_NULL)
+  """
+  Flat number or building name
+  """
+  building: String!
+  """
+  Locality, area, or street
+  """
+  locality: String!
+  """
+  City
+  """
+  city: String!
+  """
+  Postal Code
+  """
+  postalCode: String!
+  """
+  State
+  """
+  state: String!
+  """
+  Landmark nearby, optional
+  """
+  landmark: String
+  """
+  Latitude of this location; constraint: Decimal(9,6)
+  """
+  latitude: Float
+  """
+  Longitude of this location; constraint: Decimal(9,6)
+  """
+  longitude: Float
+  """
+  Name of the address resident
+  """
+  recipientName: String!
+  """
+  Mobile number of the address resident
+  """
+  recipientMobile: String!
+  """
+  Alternate mobile number of the address resident
+  """
+  recipientAlternateMobile: String
+  """
+  Address type option, available only to a customer
+  """
+  addressType: AddressType!
+  """
+  Created at this time
+  """
+  createdAt: DateTime! @createdAt
+  """
+  Updated at this time
+  """
+  updatedAt: DateTime! @updatedAt
+}
+
+"""
+Types of addresses for a customer
+"""
+enum AddressType {
+  HOME
+  WORK
+  OTHER
+}

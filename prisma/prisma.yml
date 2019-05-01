@@ -1,0 +1,17 @@
+datamodel:
+  - ./datamodel/customer.graphql
+  - ./datamodel/product.graphql
+  - ./datamodel/productVariant.graphql
+  - ./datamodel/utility.graphql
+
+generate:
+  - generator: typescript-client
+    output: ../src/generated/prisma-client-ts/
+
+seed:
+  run: npx ts-node ../src/seed/index.ts
+
+# A Prisma API can be protected with the service secret
+secret: ${env:PRISMA_SECRET}
+
+endpoint: ${env:PRISMA_ENDPOINT}

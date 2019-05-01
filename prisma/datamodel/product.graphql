@@ -1,0 +1,55 @@
+"""
+Product is an umbrella of actual deliverable variants (SKUs)
+"""
+type Product {
+  """
+  ID
+  """
+  id: ID! @id
+  """
+  Product is published given at least one variant added
+  """
+  isPublished: Boolean! @default(value: false)
+
+  # start of product container info
+  """
+  Name of the product
+  """
+  name: String!
+  """
+  Description of this product
+  """
+  description: String!
+  """
+  Name of the brand
+  """
+  brand: String!
+  """
+  Name of the manufacturer
+  """
+  manufacturer: String
+  """
+  Tags added to facilitate in search
+  """
+  tags: [String!] @scalarList(strategy: RELATION)
+  """
+  Tax applicable on this product, in percentage
+  """
+  tax: Float!
+  # end of product info
+  # 1-to-n relationship with ProductVariant
+  """
+  Variants deliverable items under this product umbrella, **in order for UI**
+  """
+  variants: [ProductVariant!]!
+    @relation(name: "ProductVariantsRelation", onDelete: CASCADE)
+  ## end
+  """
+  Created at this time
+  """
+  createdAt: DateTime! @createdAt
+  """
+  Updated at this time
+  """
+  updatedAt: DateTime! @updatedAt
+}

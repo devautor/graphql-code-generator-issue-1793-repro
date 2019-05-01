@@ -1,0 +1,53 @@
+"""
+A product variant is a deliverable product item
+"""
+type ProductVariant {
+  """
+  ID
+  """
+  id: ID! @id
+  # n-to-1 relationship with Product
+  """
+  Variant of this product
+  """
+  product: Product!
+    @relation(name: "ProductVariantsRelation", onDelete: SET_NULL)
+  """
+  Universal ID type (must be given if universal ID is given)
+  """
+  universalIdType: UniversalIdType
+  """
+  Universal product ID
+  """
+  universalId: String
+  """
+  SKU for this product variant
+  """
+  skuId: String!
+  """
+  In stock or not
+  """
+  inStock: Boolean! @default(value: false)
+  """
+  Listed price of this variant
+  """
+  listPrice: Int!
+  """
+  Sale price of this product
+  """
+  salePrice: Int!
+  # m-to-n relationship with CustomerWishlist
+  """
+  Wishlists where this product is added
+  """
+  wishlistedIn: [CustomerWishlist!]!
+    @relation(name: "WishlistedProductsRelation", onDelete: SET_NULL)
+  """
+  Created at this time
+  """
+  createdAt: DateTime! @createdAt
+  """
+  Updated at this time
+  """
+  updatedAt: DateTime! @updatedAt
+}

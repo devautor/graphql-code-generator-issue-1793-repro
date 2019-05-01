@@ -1,0 +1,81 @@
+"""
+A customer is a user which buys from the markeplace
+"""
+type Customer {
+  """
+  ID
+  """
+  id: ID! @id
+  # Personal Information (both emailId and mobileNumber can't be null together)
+  """
+  Email id of the customer (unique)
+  """
+  emailId: String! @unique
+  """
+  Mobile number of the customer
+  """
+  mobileNumber: String
+  """
+  Name of the customer
+  """
+  name: String
+  """
+  Gender
+  """
+  gender: Gender
+  # 1-to-n relationship with AddressCustomer
+  """
+  Addresses registered by the customer
+  """
+  addresses: [AddressCustomer!]!
+    @relation(name: "CustomerAddressesRelation", onDelete: CASCADE)
+  # End of the personal information
+  # 1-to-n relationship with CustomerWishlist
+  """
+  Wishlists curated by this customer
+  """
+  wishlists: [CustomerWishlist!]!
+    @relation(name: "CustomerWishlistsRelation", onDelete: CASCADE)
+  """
+  Created at this time
+  """
+  createdAt: DateTime! @createdAt
+  """
+  Updated at this time
+  """
+  updatedAt: DateTime! @updatedAt
+}
+
+"""
+Wishlist curated by a customer
+"""
+type CustomerWishlist {
+  """
+  ID
+  """
+  id: ID! @id
+  # n-to-1 relationship with Customer
+  """
+  Customer who curated this list
+  """
+  customer: Customer!
+    @relation(name: "CustomerWishlistsRelation", onDelete: SET_NULL)
+  """
+  Name of this wishlist (unique for a customer)
+  """
+  listName: String!
+  # m-to-n relationship with ProductVariant
+  """
+  Product Variants added to this list
+  """
+  productVariants: [ProductVariant!]!
+    @relation(link: TABLE, name: "WishlistedProductsRelation")
+  """
+  Created at this time
+  """
+  createdAt: DateTime! @createdAt
+  """
+  Updated at this time
+  """
+  updatedAt: DateTime! @updatedAt
+}

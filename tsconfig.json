@@ -1,0 +1,13 @@
+{
+  "compilerOptions": {
+    "target": "es2017",
+    "moduleResolution": "node",
+    "module": "commonjs",
+    "sourceMap": true,
+    "noUnusedLocals": true,
+    "rootDir": "./",
+    "outDir": "dist",
+    "lib": ["esnext", "dom"],
+    "esModuleInterop": true
+  }
+}

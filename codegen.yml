@@ -1,0 +1,15 @@
+schema: http://localhost:4000/graphql
+overwrite: true
+#watch: true
+require:
+  - ts-node/register
+generates:
+  ./src/generated/resolvers-types.ts:
+    config:
+      # ensure this path is relative to "src/generated/graphql.ts"
+      contextType: IContext
+      useIndexSignature: true
+    plugins:
+      - add: "import { IContext } from '../../src/context';"
+      - typescript
+      - typescript-resolvers
